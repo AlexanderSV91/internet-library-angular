@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {OrderBookResponse} from '../dto/response/order-book-response';
 import {AppConstants} from '../helper/app.constants';
 import {OrderBookRequest} from '../dto/request/order-book-request';
+import {PageableResponse} from '../dto/response/pageable-response';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -17,16 +18,16 @@ export class OrderBookService {
   constructor(private http: HttpClient) {
   }
 
-  getOrderBooksByUserUserName(): Observable<OrderBookResponse> {
-    return this.http.get<OrderBookResponse>(AppConstants.API_URL_ORDER_BOOK, httpOptions);
+  getOrderBooksByUserUserName(): Observable<PageableResponse<OrderBookResponse>> {
+    return this.http.get<PageableResponse<OrderBookResponse>>(AppConstants.API_URL_ORDER_BOOK, httpOptions);
   }
 
   getAllOrderBookById(id: number): Observable<OrderBookResponse> {
-    return this.http.get<OrderBookResponse>(AppConstants.API_URL_ORDER_BOOK + id, httpOptions);
+    return this.http.get<OrderBookResponse>(AppConstants.API_URL_ORDER_BOOK + '/' + id, httpOptions);
   }
 
-  getOrderBookByReader(idReader: number): Observable<OrderBookResponse> {
-    return this.http.get<OrderBookResponse>(AppConstants.API_URL_ORDER_BOOK + idReader, httpOptions);
+  getOrderBookByReader(idReader: number): Observable<PageableResponse<OrderBookResponse>> {
+    return this.http.get<PageableResponse<OrderBookResponse>>(AppConstants.API_URL_ORDER_BOOK + '/' + idReader, httpOptions);
   }
 
   addOrderBook(orderBookRequest: OrderBookRequest): Observable<OrderBookResponse> {
@@ -34,10 +35,10 @@ export class OrderBookService {
   }
 
   updateReaderById(id: number, orderBookRequest: OrderBookRequest): Observable<OrderBookResponse> {
-    return this.http.put<OrderBookResponse>(AppConstants.API_URL_ORDER_BOOK + id, orderBookRequest, httpOptions);
+    return this.http.put<OrderBookResponse>(AppConstants.API_URL_ORDER_BOOK + '/' + id, orderBookRequest, httpOptions);
   }
 
   deleteOrderBookById(id: number): Observable<any> {
-    return this.http.delete(AppConstants.API_URL_ORDER_BOOK + id);
+    return this.http.delete(AppConstants.API_URL_ORDER_BOOK + '/' + id);
   }
 }

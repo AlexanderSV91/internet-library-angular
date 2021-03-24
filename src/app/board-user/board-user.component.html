@@ -8,6 +8,20 @@
         <th scope="col">First name</th>
         <th scope="col">Last name</th>
         <th scope="col">Age</th>
+        <th>
+          <button class="btn btn-success" (click)="titleModal = 'Add User'; clearData(); open(content)" *ngIf="isEmployee">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/06/OOjs_UI_icon_add.svg"
+              width="20">
+          </button>
+          <button class="btn btn-primary" (click)="previousPage()" *ngIf="isEmployee">
+            <
+          </button>
+          <label style="font-size:20px" *ngIf="isEmployee">{{pageNumber}}</label>
+          <button class="btn btn-primary" (click)="nextPage()" *ngIf="isEmployee">
+            >
+          </button>
+        </th>
       </tr>
       </thead>
       <tbody>
@@ -17,9 +31,56 @@
         <td>{{ userResponse.firstName }}</td>
         <td>{{ userResponse.lastName }}</td>
         <td>{{ userResponse.age }}</td>
-        <!--        <td><a href="mailto:{{ bookResponse.name }}">{{ bookResponse.name }}</a></td>-->
+        <td>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modal"
+                  (click)="titleModal = 'Edit User'; fillFieldsModal(userResponse); open(content); id = userResponse.id">
+            <img
+              src="https://image.flaticon.com/icons/png/512/84/84380.png"
+              width="20">
+          </button>
+          <button class="btn btn-danger" (click)="deleteUserById(userResponse.id)" *ngIf="isEmployee">
+            <img
+              src="https://image.flaticon.com/icons/png/512/61/61848.png"
+              width="20">
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{titleModal}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="input-group">
+      <div class="input-group mb-1">
+        <input type="text" class="form-control" placeholder="username" [(ngModel)]="user.username">
+      </div>
+      <div class="input-group mb-2">
+        <input type="password" class="form-control" placeholder="password" [(ngModel)]="user.password">
+      </div>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="first name" [(ngModel)]="user.firstName">
+      </div>
+      <div class="input-group mb-4">
+        <input type="text" class="form-control" placeholder="last name" [(ngModel)]="user.lastName">
+      </div>
+      <div class="input-group mb-4">
+        <input type="text" class="form-control" placeholder="email" [(ngModel)]="user.email">
+      </div>
+      <div class="input-group mb-5">
+        <input type="text" class="form-control" placeholder="age" [(ngModel)]="user.age">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close(titleModal)">Save
+    </button>
+  </div>
+</ng-template>

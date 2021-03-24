@@ -4,18 +4,72 @@
       <thead class="thead-dark">
       <tr>
         <th scope="col">Name</th>
+        <th scope="col">Condition</th>
         <th scope="col">Description</th>
-        <th scope="col">Book Condition</th>
+        <th>
+          <button class="btn btn-success" (click)="titleModal = 'Add Book'; clearData(); open(content)" *ngIf="isEmployee">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/06/OOjs_UI_icon_add.svg"
+              width="20">
+          </button>
+          <button class="btn btn-primary" (click)="previousPage()">
+            <
+          </button>
+          <label style="font-size:20px">{{pageNumber}}</label>
+          <button class="btn btn-primary" (click)="nextPage()">
+            >
+          </button>
+        </th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let bookResponse of booksResponse">
         <td>{{ bookResponse.name }}</td>
-        <td>{{ bookResponse.description }}</td>
         <td>{{ bookResponse.bookCondition }}</td>
-        <!--        <td><a href="mailto:{{ bookResponse.name }}">{{ bookResponse.name }}</a></td>-->
+        <td>{{ bookResponse.description }}</td>
+        <td>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modal" *ngIf="isEmployee"
+                  (click)="titleModal = 'Edit Book'; fillFieldsModal(bookResponse); open(content); id = bookResponse.id">
+            <img
+              src="https://image.flaticon.com/icons/png/512/84/84380.png"
+              width="20">
+          </button>
+          <button class="btn btn-danger" (click)="deleteBookById(bookResponse.id)" *ngIf="isEmployee">
+            <img
+              src="https://image.flaticon.com/icons/png/512/61/61848.png"
+              width="20">
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{titleModal}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="input-group">
+      <div class="input-group mb-1">
+        <input type="text" class="form-control" placeholder="name" [(ngModel)]="book.name">
+      </div>
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" placeholder="book condition" [(ngModel)]="book.bookCondition">
+      </div>
+      <div class="input-group mb-3">
+                        <textarea class="form-control" aria-label="With textarea"
+                                  placeholder="description"
+                                  [(ngModel)]="book.description"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close(titleModal)">Save
+    </button>
+  </div>
+</ng-template>

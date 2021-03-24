@@ -18,12 +18,12 @@ export class BookService {
   constructor(private http: HttpClient) {
   }
 
-  getAllBooksWithPageable(): Observable<PageableResponse<BookResponse>> {
-    return this.http.get<PageableResponse<BookResponse>>(AppConstants.API_URL_BOOK, httpOptions);
+  getAllBooksWithPageable(pageNumber: number, size: number): Observable<PageableResponse<BookResponse>> {
+    return this.http.get<PageableResponse<BookResponse>>(AppConstants.API_URL_BOOK + '?page=' + pageNumber + '&size=' + size, httpOptions);
   }
 
   getBookById(id: number): Observable<BookResponse> {
-    return this.http.get<BookResponse>(AppConstants.API_URL_BOOK + id, httpOptions);
+    return this.http.get<BookResponse>(AppConstants.API_URL_BOOK + '/' + id, httpOptions);
   }
 
   saveBook(bookRequest: BookRequest): Observable<BookResponse> {
@@ -31,10 +31,10 @@ export class BookService {
   }
 
   updateBookById(id: number, bookRequest: BookRequest): Observable<BookResponse> {
-    return this.http.put<BookResponse>(AppConstants.API_URL_BOOK, bookRequest, httpOptions);
+    return this.http.put<BookResponse>(AppConstants.API_URL_BOOK + '/' + id, bookRequest, httpOptions);
   }
 
   deleteBookById(id: number): Observable<any> {
-    return this.http.delete(AppConstants.API_URL_BOOK + id);
+    return this.http.delete(AppConstants.API_URL_BOOK + '/' + id);
   }
 }

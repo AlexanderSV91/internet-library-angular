@@ -6,28 +6,30 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {BoardUserComponent} from './board-user/board-user.component';
 import {BoardBookComponent} from './board-book/board-book.component';
 
 import {authInterceptorProviders} from './helper/auth.interceptor';
+import { BoardOrderBookComponent } from './board-order-book/board-order-book.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     BoardUserComponent,
-    BoardBookComponent
+    BoardBookComponent,
+    BoardOrderBookComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

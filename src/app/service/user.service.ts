@@ -18,20 +18,20 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getAllUserByUsername(): Observable<PageableResponse<UserResponse>> {
-    return this.http.get<PageableResponse<UserResponse>>(AppConstants.API_URL_USER, httpOptions);
+  getAllUser(pageNumber: number, size: number): Observable<PageableResponse<UserResponse>> {
+    return this.http.get<PageableResponse<UserResponse>>(AppConstants.API_URL_USER + '?page=' + pageNumber + '&size=' + size, httpOptions);
   }
 
   getCurrentUser(): Observable<UserResponse> {
-    return this.http.get<UserResponse>(AppConstants.API_URL_USER + 'current-user', httpOptions);
+    return this.http.get<UserResponse>(AppConstants.API_URL_USER + '/current-user', httpOptions);
   }
 
   getMe(): Observable<any> {
-    return this.http.get(AppConstants.API_URL_USER + 'me', httpOptions);
+    return this.http.get(AppConstants.API_URL_USER + '/me', httpOptions);
   }
 
   getUserById(id: number): Observable<UserResponse> {
-    return this.http.get<UserResponse>(AppConstants.API_URL_USER + id, httpOptions);
+    return this.http.get<UserResponse>(AppConstants.API_URL_USER + '/' + id, httpOptions);
   }
 
   addUser(userRequest: UserRequest): Observable<UserResponse> {
@@ -39,10 +39,10 @@ export class UserService {
   }
 
   updateUserById(id: number, userRequest: UserRequest): Observable<UserResponse> {
-    return this.http.put<UserResponse>(AppConstants.API_URL_USER + id, userRequest, httpOptions);
+    return this.http.put<UserResponse>(AppConstants.API_URL_USER + '/' + id, userRequest, httpOptions);
   }
 
   deleteUserById(id: number): Observable<any> {
-    return this.http.delete(AppConstants.API_URL_USER + id);
+    return this.http.delete(AppConstants.API_URL_USER + '/' + id);
   }
 }
