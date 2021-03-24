@@ -5,7 +5,7 @@ import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
 import {BoardBookComponent} from './board-book/board-book.component';
-import {BoardUserComponent} from "./board-user/board-user.component";
+import {BoardUserComponent} from './board-user/board-user.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AppConstants} from '../helper/app.constants';
-import {BookResponse} from "../dto/response/book-response";
-import {BookRequest} from "../dto/request/book-request";
-import {PageableResponse} from "../dto/response/pageable-response";
+import {BookResponse} from '../dto/response/book-response';
+import {BookRequest} from '../dto/request/book-request';
+import {PageableResponse} from '../dto/response/pageable-response';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

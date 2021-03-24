@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {BookService} from "../service/book.service";
-import {BookResponse} from "../dto/response/book-response";
-import {AppComponent} from "../app.component";
+import {BookService} from '../service/book.service';
+import {BookResponse} from '../dto/response/book-response';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-board-book',
@@ -26,6 +26,7 @@ export class BoardBookComponent implements OnInit {
         this.booksResponse = data.content;
       },
       err => {
+        console.log(err);
       }
     );
   }

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {AppConstants} from '../helper/app.constants';
-import {UserRequest} from "../dto/request/user-request";
-import {UserResponse} from "../dto/response/user-response";
-import {SignInRequest} from "../dto/request/sign-in-request";
+import {UserRequest} from '../dto/request/user-request';
+import {UserResponse} from '../dto/response/user-response';
+import {SignInRequest} from '../dto/request/sign-in-request';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

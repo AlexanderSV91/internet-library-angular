@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {OrderBookResponse} from "../dto/response/order-book-response";
-import {AppConstants} from "../helper/app.constants";
-import {OrderBookRequest} from "../dto/request/order-book-request";
+import {Observable} from 'rxjs';
+import {OrderBookResponse} from '../dto/response/order-book-response';
+import {AppConstants} from '../helper/app.constants';
+import {OrderBookRequest} from '../dto/request/order-book-request';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})

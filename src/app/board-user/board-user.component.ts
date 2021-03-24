@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../service/user.service';
-import {UserResponse} from "../dto/response/user-response";
-import {AppComponent} from "../app.component";
+import {UserResponse} from '../dto/response/user-response';
+import {AppComponent} from '../app.component';
 
 @Component({
   selector: 'app-board-user',
@@ -26,6 +26,7 @@ export class BoardUserComponent implements OnInit {
         this.usersResponse = data.content;
       },
       err => {
+        console.log(err);
       }
     );
   }
