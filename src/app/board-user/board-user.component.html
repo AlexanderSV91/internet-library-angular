@@ -58,29 +58,72 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="input-group">
-      <div class="input-group mb-1">
-        <input type="text" class="form-control" placeholder="username" [(ngModel)]="user.username">
+    <form name="form" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="username">Username</label> <input type="text" class="form-control"
+                                                      name="username"
+                                                      [(ngModel)]="user.username" required
+                                                      minlength="3"
+                                                      maxlength="20" #username="ngModel"/>
+        <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+          <div *ngIf="username.errors.required">username is required</div>
+          <div *ngIf="username.errors.minlength">username must be at least 3 characters</div>
+          <div *ngIf="username.errors.maxlength">username must be at most 20 characters</div>
+        </div>
       </div>
-      <div class="input-group mb-2">
-        <input type="password" class="form-control" placeholder="password" [(ngModel)]="user.password">
+      <div class="form-group">
+        <label for="email">Email</label> <input type="email" class="form-control" name="email"
+                                                [(ngModel)]="user.email" required email
+                                                #email="ngModel"/>
+        <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors.email">Email must be a valid email address</div>
+        </div>
       </div>
-      <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="first name" [(ngModel)]="user.firstName">
+      <div class="form-group">
+        <label for="password">Password</label> <input type="password" class="form-control"
+                                                      name="password" [(ngModel)]="user.password"
+                                                      required minlength="6"
+                                                      #password="ngModel"/>
+        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
       </div>
-      <div class="input-group mb-4">
-        <input type="text" class="form-control" placeholder="last name" [(ngModel)]="user.lastName">
+      <div class="form-group">
+        <label for="firstName">First name</label> <input type="text" class="form-control"
+                                                         name="firstName"
+                                                         [(ngModel)]="user.firstName" required
+                                                         minlength="3"
+                                                         maxlength="20" #firstName="ngModel"/>
+        <div class="alert-danger" *ngIf="f.submitted && firstName.invalid">
+          <div *ngIf="firstName.errors.required">firstName is required</div>
+          <div *ngIf="firstName.errors.minlength">firstName must be at least 3 characters</div>
+          <div *ngIf="firstName.errors.maxlength">firstName must be at most 20 characters</div>
+        </div>
       </div>
-      <div class="input-group mb-4">
-        <input type="text" class="form-control" placeholder="email" [(ngModel)]="user.email">
+      <div class="form-group">
+        <label for="lastName">Last name</label> <input type="text" class="form-control"
+                                                       name="lastName"
+                                                       [(ngModel)]="user.lastName" required
+                                                       minlength="3"
+                                                       maxlength="20" #lastName="ngModel"/>
+        <div class="alert-danger" *ngIf="f.submitted && lastName.invalid">
+          <div *ngIf="lastName.errors.required">lastName is required</div>
+          <div *ngIf="lastName.errors.minlength">lastName must be at least 3 characters</div>
+          <div *ngIf="lastName.errors.maxlength">lastName must be at most 20 characters</div>
+        </div>
       </div>
-      <div class="input-group mb-5">
-        <input type="text" class="form-control" placeholder="age" [(ngModel)]="user.age">
+      <div class="form-group">
+        <label for="age">Age</label> <input type="number" class="form-control"
+                                            name="age"
+                                            [(ngModel)]="user.age" required
+                                            #age="ngModel"/>
       </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.close(titleModal)">Save
-    </button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close(titleModal)">Save
+        </button>
+      </div>
+    </form>
   </div>
 </ng-template>

@@ -93,6 +93,7 @@ export class BoardUserComponent implements OnInit {
   clearData(): void {
     this.id = 0;
     this.user.username = null;
+    this.user.password = null;
     this.user.email = null;
     this.user.firstName = null;
     this.user.lastName = null;
