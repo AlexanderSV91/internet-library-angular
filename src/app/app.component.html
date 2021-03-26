@@ -4,7 +4,7 @@
       <img src="/assets/img/logo.jpg" width="70" height="50" alt="internet-library">
     </a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item"><a href="/orderbook" class="nav-link" *ngIf="isLoggedIn" routerLink="book">Order book</a>
+      <li class="nav-item"><a href="/orderbook" class="nav-link" *ngIf="isLoggedIn && isEmployee" routerLink="orderbook">Order book</a>
       </li>
       <li class="nav-item"><a href="/book" class="nav-link" *ngIf="isLoggedIn" routerLink="book">Book</a>
       </li>
@@ -17,8 +17,7 @@
       <li class="nav-item"><a href="/login" class="nav-link" routerLink="login">Login</a></li>
     </ul>
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item"><a href="/profile" class="nav-link"
-                              routerLink="profile">{{ username }}</a></li>
+      <li class="nav-item"><a class="nav-link">{{ username }}</a></li>
       <li class="nav-item"><a href class="nav-link" (click)="logout()">LogOut</a></li>
     </ul>
   </nav>

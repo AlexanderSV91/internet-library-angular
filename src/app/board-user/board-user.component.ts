@@ -33,10 +33,10 @@ export class BoardUserComponent implements OnInit {
       this.isEmployee = employee;
     });
 
-    this.getAllBooksWithPageable();
+    this.getAllUsersWithPageable();
   }
 
-  getAllBooksWithPageable(): void {
+  getAllUsersWithPageable(): void {
     this.userService.getAllUser(this.pageNumber, this.size).subscribe(
       data => {
         this.pageableResponse = data;
@@ -52,32 +52,32 @@ export class BoardUserComponent implements OnInit {
   saveUser(): void {
     this.userService
       .addUser(this.user)
-      .subscribe(() => this.getAllBooksWithPageable());
+      .subscribe(() => this.getAllUsersWithPageable());
   }
 
   updateUser(): void {
     this.userService
       .updateUserById(this.id, this.user)
-      .subscribe(() => this.getAllBooksWithPageable());
+      .subscribe(() => this.getAllUsersWithPageable());
   }
 
   deleteUserById(id: number): void {
     this.userService
       .deleteUserById(id)
-      .subscribe(() => this.getAllBooksWithPageable());
+      .subscribe(() => this.getAllUsersWithPageable());
   }
 
   previousPage(): void {
     if (this.pageNumber > 0) {
       this.pageNumber--;
-      this.getAllBooksWithPageable();
+      this.getAllUsersWithPageable();
     }
   }
 
   nextPage(): void {
     if (this.pageNumber < this.pageableResponse.totalPages - 1) {
       this.pageNumber++;
-      this.getAllBooksWithPageable();
+      this.getAllUsersWithPageable();
     }
   }
 

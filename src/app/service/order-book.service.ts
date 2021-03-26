@@ -18,16 +18,22 @@ export class OrderBookService {
   constructor(private http: HttpClient) {
   }
 
-  getOrderBooksByUserUserName(): Observable<PageableResponse<OrderBookResponse>> {
-    return this.http.get<PageableResponse<OrderBookResponse>>(AppConstants.API_URL_ORDER_BOOK, httpOptions);
+  getOrderBooks(pageNumber: number, size: number): Observable<PageableResponse<OrderBookResponse>> {
+    return this.http.get<PageableResponse<OrderBookResponse>>(
+      AppConstants.API_URL_ORDER_BOOK + '?page=' + pageNumber + '&size=' + size, httpOptions);
   }
 
   getAllOrderBookById(id: number): Observable<OrderBookResponse> {
     return this.http.get<OrderBookResponse>(AppConstants.API_URL_ORDER_BOOK + '/' + id, httpOptions);
   }
 
-  getOrderBookByReader(idReader: number): Observable<PageableResponse<OrderBookResponse>> {
-    return this.http.get<PageableResponse<OrderBookResponse>>(AppConstants.API_URL_ORDER_BOOK + '/' + idReader, httpOptions);
+  getOrderBookByReader(idReader: number, pageNumber: number, size: number): Observable<PageableResponse<OrderBookResponse>> {
+    return this.http.get<PageableResponse<OrderBookResponse>>(
+      AppConstants.API_URL_ORDER_BOOK + '/user/' + idReader + '?page=' + pageNumber + '&size=' + size, httpOptions);
+  }
+
+  getAllStatus(): Observable<Array<string>> {
+    return this.http.get<Array<string>>(AppConstants.API_URL_ORDER_BOOK + '/status');
   }
 
   addOrderBook(orderBookRequest: OrderBookRequest): Observable<OrderBookResponse> {

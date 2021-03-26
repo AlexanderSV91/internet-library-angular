@@ -1,1 +1,117 @@
-<p>board-order-book works!</p>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Status</th>
+        <th scope="col">Username</th>
+        <th scope="col">Book name</th>
+        <th scope="col">Note</th>
+        <th scope="col">Start date</th>
+        <th scope="col">End date</th>
+        <th>
+          <button class="btn btn-primary" (click)="getAllOrderBooksWithPageable()">
+            <img
+              src="http://simpleicon.com/wp-content/uploads/refresh.png"
+              width="20">
+          </button>
+          <button class="btn btn-success"
+                  (click)="titleModal = 'Add Order Book'; clearData(); open(content)"
+                  *ngIf="isEmployee">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/06/OOjs_UI_icon_add.svg"
+              width="20">
+          </button>
+          <button class="btn btn-primary" (click)="previousPage()">
+            <
+          </button>
+          <label style="font-size:20px">{{pageNumber}}</label>
+          <button class="btn btn-primary" (click)="nextPage()">
+            >
+          </button>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let orderBook of orderBookResponses">
+        <td>{{ orderBook.status}}</td>
+        <td>{{ orderBook.user.username }}</td>
+        <td>{{ orderBook.book.name }}</td>
+        <td>{{ orderBook.note }}</td>
+        <td>{{ orderBook.startDate }}</td>
+        <td>{{ orderBook.endDate }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="getOrderBookByReader(orderBook.user.id)">
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png"
+              width="20"></button>
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modal"
+                  (click)="titleModal = 'Edit Order Book'; fillFieldsModal(orderBook); open(content); id = userResponse.id">
+            <img
+              src="https://image.flaticon.com/icons/png/512/84/84380.png"
+              width="20">
+          </button>
+          <button class="btn btn-danger" (click)="deleteOrderBookById(userResponse.id)"
+                  *ngIf="isEmployee">
+            <img
+              src="https://image.flaticon.com/icons/png/512/61/61848.png"
+              width="20">
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{titleModal}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="input-group">
+      <label for="statusS"
+             style="margin-right: 20px; line-height:25px;" text="status">Status</label>
+      <div class="input-group mb-1">
+        <select id="statusS" [(ngModel)]="orderBookRequest.status">
+          <option>{{orderBookRequest.status}}</option>
+          <option *ngFor="let name of enumKeys" [value]="name"> {{name}} </option>
+        </select>
+      </div>
+      <label for="userId">username</label>
+      <div class="input-group mb-2">
+        <select id="userId" [(ngModel)]="username">
+          <option *ngFor="let userResponse of usersResponses"
+                  [value]="userResponse.username"> {{userResponse.username}} </option>
+        </select>
+      </div>
+      <label for="bookId">book name</label>
+      <div class="input-group mb-3" style="width: 450px; /*overflow: hidden;*/">
+        <select id="bookId" [(ngModel)]="bookname">
+          <option *ngFor="let bookResponse of booksResponses"
+                  [value]="bookResponse.name"> {{bookResponse.name}} </option>
+        </select>
+      </div>
+      <div class="input-group mb-4">
+                        <textarea class="form-control" aria-label="With textarea"
+                                  placeholder="note"
+                                  [(ngModel)]="orderBookRequest.note"></textarea>
+      </div>
+      <div class="input-group mb-5">
+        <input type="text" class="form-control" placeholder="start date"
+               [(ngModel)]="orderBookRequest.startDate">
+      </div>
+      <div class="input-group mb-6">
+        <input type="text" class="form-control" placeholder="end date"
+               [(ngModel)]="orderBookRequest.endDate">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close(titleModal)">Save
+    </button>
+  </div>
+</ng-template>
